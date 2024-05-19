@@ -14,7 +14,8 @@ public class ContractFileManager {
             } else if (contract instanceof LeaseContract) {
                 contractType = "LEASE";
             }
-            String commonContractInfo = contractType + "|" + contract.getDateOfContract() + "|" + contract.getCustomerName() + "|" + contract.getCustomerEmail() + "|";
+            String commonContractInfo = contractType + "|" + contract.getDateOfContract()
+                    + "|" + contract.getCustomerName() + "|" + contract.getCustomerEmail() + "|";
 
             Vehicle vehicle = contract.getVehicleSold();
             if (contract instanceof SalesContract) {

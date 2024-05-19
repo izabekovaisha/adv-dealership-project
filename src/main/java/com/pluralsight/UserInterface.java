@@ -26,7 +26,9 @@ public class UserInterface {
             System.out.println("7. Get all vehicles");
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
-            System.out.println("99. Quit");
+            System.out.println("10. Sell vehicle");
+            System.out.println("11.Lease vehicle");
+            System.out.println("0. Quit");
 
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
@@ -59,7 +61,13 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
-                case "99":
+                case "10":
+                    sellVehicle();
+                    break;;
+                case "11":
+                    leaseVehicle();
+                    break;
+                case "0":
                     quit = true;
                     break;
                 default:
@@ -183,6 +191,28 @@ public class UserInterface {
         manager.saveDealership(dealership);
     }
 
+    public void sellVehicle() {
+        System.out.println("Enter contract date (YYYYMMDD): ");
+        String dateOfContract = scanner.nextLine();
+
+        System.out.println("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.println("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
+
+
+
+        System.out.println("Enter sales tax amount: ");
+
+        System.out.println("Enter recording fee: ");
+
+        System.out.println("Enter processing fee: ");
+
+        System.out.println("Is there an option for financing? (YES/NO): ");
+        boolean finance = scanner.next().equalsIgnoreCase("YES");
+
+    }
     private void init() {
         DealershipFileManager manager = new DealershipFileManager();
         dealership = manager.getDealership();
