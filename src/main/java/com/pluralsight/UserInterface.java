@@ -32,7 +32,7 @@ public class UserInterface {
             System.out.println("0. Quit");
 
             System.out.print("Enter your choice: ");
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().trim();
 
             switch (choice) {
                 case "1":
@@ -64,7 +64,7 @@ public class UserInterface {
                     break;
                 case "10":
                     sellVehicle();
-                    break;;
+                    break;
                 case "11":
                     leaseVehicle();
                     break;
@@ -73,6 +73,7 @@ public class UserInterface {
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
     }
@@ -82,6 +83,7 @@ public class UserInterface {
         double min = scanner.nextDouble();
         System.out.print("Enter maximum price: ");
         double max = scanner.nextDouble();
+        scanner.nextLine();
         List<Vehicle> vehicles = dealership.getVehiclesByPrice(min, max);
         displayVehicles(vehicles);
     }
@@ -215,6 +217,7 @@ public class UserInterface {
         }
         if (vehicleSold == null) {
             System.out.println("Vehicle not found in inventory. Please try again.");
+            return;
         }
 
         System.out.println("Enter sales tax amount: ");
@@ -231,7 +234,7 @@ public class UserInterface {
 
         System.out.println("Is there an option for financing? (YES/NO): ");
         boolean financeOption = scanner.next().equalsIgnoreCase("YES");
-
+        scanner.nextLine();
         SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail, vehicleSold, salesTaxAmount, recordingFee, processingFee, financeOption);
 
         ContractFileManager contractFileManager = new ContractFileManager();
@@ -239,58 +242,58 @@ public class UserInterface {
 
         dealership.removeVehicle(vehicleSold);
         System.out.println("Vehicle sold and contract saved successfully.");
+    }
 
-        public void leaseVehicle() {
-            System.out.println("Enter contract date (YYYYMMDD): ");
-            dateOfContract = scanner.nextLine();
+    public void leaseVehicle() {
+        System.out.println("Enter contract date (YYYYMMDD): ");
+        String dateOfContract = scanner.nextLine();
 
-            System.out.println("Enter customer name: ");
-            customerName = scanner.nextLine();
+        System.out.println("Enter customer name: ");
+        String customerName = scanner.nextLine();
 
-            System.out.println("Enter customer email: ");
-            customerEmail = scanner.nextLine();
+        System.out.println("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
 
-            System.out.println("Enter vehicle VIN: ");
-            vin = scanner.nextInt();
-            scanner.nextLine();
+        System.out.println("Enter vehicle VIN: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
 
-            Vehicle vehicleLeased = null;
-            for (Vehicle vehicle : dealership.getAllVehicles()) {
-                if (vehicle.getVin() == vin) {
-                    vehicleLeased = vehicle;
-                    break;
-                }
+        Vehicle vehicleLeased = null;
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == vin) {
+                vehicleLeased = vehicle;
+                break;
             }
-            if (vehicleLeased == null) {
-                System.out.println("Vehicle not found in inventory. Please try again.");
-                return;
-            }
-
-            int currentYear = LocalDateTime.now().getYear();
-            if (currentYear - vehicleLeased.getYear() > 3) {
-                System.out.println("Vehicle is older than 3 years and cannot be leased.");
-                return;;
-            }
-
-            System.out.println("Enter expected ending value: ");
-            double expectedEndingValue = scanner.nextDouble();
-            scanner.nextLine();
-
-            System.out.println("Enter lease fee: ");
-            double leaseFee = scanner.nextDouble();
-            scanner.nextLine();
-
-            LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, leaseVehicle, expectedEndingValue, leaseFee);
-
-            contractFileManager = new ContractFileManager();
-            contractFileManager.saveContract(leaseContract);
-
-            dealership.removeVehicle(vehicleLeased);
-            System.out.println("Vehicle leased and contract saved successfully.");
-
+        }
+        if (vehicleLeased == null) {
+            System.out.println("Vehicle not found in inventory. Please try again.");
+            return;
         }
 
+        int currentYear = LocalDateTime.now().getYear();
+        if (currentYear - vehicleLeased.getYear() > 3) {
+            System.out.println("Vehicle is older than 3 years and cannot be leased.");
+            return;
+        }
+
+        System.out.println("Enter expected ending value: ");
+        double expectedEndingValue = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.println("Enter lease fee: ");
+        double leaseFee = scanner.nextDouble();
+        scanner.nextLine();
+
+        LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, vehicleLeased, expectedEndingValue, leaseFee);
+
+        ContractFileManager contractFileManager = new ContractFileManager();
+        contractFileManager.saveContract(leaseContract);
+
+        dealership.removeVehicle(vehicleLeased);
+        System.out.println("Vehicle leased and contract saved successfully.");
+
     }
+
     private void init() {
         DealershipFileManager manager = new DealershipFileManager();
         dealership = manager.getDealership();
