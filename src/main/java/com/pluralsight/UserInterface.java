@@ -70,7 +70,7 @@ public class UserInterface {
                     leaseVehicle();
                     break;
                 case "12":
-                    adminLogin();
+
                     break;
                 case "0":
                     quit = true;
@@ -245,6 +245,8 @@ public class UserInterface {
         contractFileManager.saveContract(salesContract);
 
         dealership.removeVehicle(vehicleSold);
+        DealershipFileManager manager = new DealershipFileManager();
+        manager.saveDealership(dealership);
         System.out.println("Vehicle sold and contract saved successfully.");
     }
 
@@ -294,21 +296,12 @@ public class UserInterface {
         contractFileManager.saveContract(leaseContract);
 
         dealership.removeVehicle(vehicleLeased);
+        DealershipFileManager manager = new DealershipFileManager();
+        manager.saveDealership(dealership);
         System.out.println("Vehicle leased and contract saved successfully.");
 
     }
 
-    private void adminLogin() {
-        System.out.println("Enter the admin password: ");
-        String password = scanner.nextLine();
-        if (password.equals(admin_password)){
-            System.out.println("Login was successful");
-            AdminUserInterface adminUserInterface = new AdminUserInterface(dealership);
-            adminInterface.display();
-        } else {
-            System.out.println("Incorrect password. Please try again.");
-        }
-    }
 
     private void init() {
         DealershipFileManager manager = new DealershipFileManager();

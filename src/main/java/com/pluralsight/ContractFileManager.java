@@ -5,9 +5,8 @@ import java.io.*;
 
 public class ContractFileManager {
 
-
     public void saveContract(Contract contract) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
             String contractType = "";
             if (contract instanceof SalesContract) {
                 contractType = "SALE";
@@ -24,7 +23,7 @@ public class ContractFileManager {
                         + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer()
                         + "|" + vehicle.getPrice() + "|" + salesContract.getSalesTaxAmount() + "|" + salesContract.getRecordingFee()
                         + "|" + salesContract.getProcessingFee() + "|" + salesContract.getTotalPrice()
-                        + "|" + (salesContract.isFinance() ? "YES" : "NO" + "|" + salesContract.getMonthlyPayment()));
+                        + "|" + (salesContract.isFinance() ? "YES" : "NO") + "|" + salesContract.getMonthlyPayment());
             } else if (contract instanceof LeaseContract) {
                 LeaseContract leaseContract = (LeaseContract) contract;
                 bw.write(commonContractInfo + vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake()
