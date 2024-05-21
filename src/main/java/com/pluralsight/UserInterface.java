@@ -29,6 +29,7 @@ public class UserInterface {
             System.out.println("9. Remove vehicle");
             System.out.println("10. Sell vehicle");
             System.out.println("11.Lease vehicle");
+            System.out.println("12. Admin");
             System.out.println("0. Quit");
 
             System.out.print("Enter your choice: ");
@@ -67,6 +68,9 @@ public class UserInterface {
                     break;
                 case "11":
                     leaseVehicle();
+                    break;
+                case "12":
+                    adminLogin();
                     break;
                 case "0":
                     quit = true;
@@ -292,6 +296,18 @@ public class UserInterface {
         dealership.removeVehicle(vehicleLeased);
         System.out.println("Vehicle leased and contract saved successfully.");
 
+    }
+
+    private void adminLogin() {
+        System.out.println("Enter the admin password: ");
+        String password = scanner.nextLine();
+        if (password.equals(admin_password)){
+            System.out.println("Login was successful");
+            AdminUserInterface adminUserInterface = new AdminUserInterface(dealership);
+            adminInterface.display();
+        } else {
+            System.out.println("Incorrect password. Please try again.");
+        }
     }
 
     private void init() {
