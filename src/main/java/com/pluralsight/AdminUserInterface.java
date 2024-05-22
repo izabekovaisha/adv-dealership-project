@@ -7,7 +7,6 @@ public class AdminUserInterface {
 
     private String admin_password = "admin_password2024!";
     private Scanner scanner;
-
     private ContractFileManager contractFileManager;
 
     public AdminUserInterface() {
@@ -70,17 +69,18 @@ public class AdminUserInterface {
         System.out.println("Enter customer name: ");
         String customerName = scanner.nextLine().trim();
         List<Contract> allContracts = contractFileManager.getAllContracts();
-        boolean foundByCustomerNames = false;
+        boolean found = false;
 
         for (Contract contract : allContracts) {
             if (contract.getCustomerName().equalsIgnoreCase(customerName)) {
 
                 System.out.println(contract.toString());
-                foundByCustomerNames = true;
+                found = true;
             }
         }
-        if (!foundByCustomerNames) {
+        if (!found) {
             System.out.println("No contracts found for customer: " + customerName);
         }
     }
 }
+

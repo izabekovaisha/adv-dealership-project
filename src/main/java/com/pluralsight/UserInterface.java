@@ -70,7 +70,8 @@ public class UserInterface {
                     leaseVehicle();
                     break;
                 case "12":
-
+                    AdminUserInterface adminUserInterface = new AdminUserInterface();
+                    adminUserInterface.displayAdminInterface();
                     break;
                 case "0":
                     quit = true;
@@ -239,7 +240,7 @@ public class UserInterface {
         System.out.println("Is there an option for financing? (YES/NO): ");
         boolean financeOption = scanner.next().equalsIgnoreCase("YES");
         scanner.nextLine();
-        SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail, vehicleSold, salesTaxAmount, recordingFee, processingFee, financeOption);
+        SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail, vehicleSold, salesTaxAmount, recordingFee, processingFee, financeOption, monthlyPayment);
 
         ContractFileManager contractFileManager = new ContractFileManager();
         contractFileManager.saveContract(salesContract);
@@ -290,7 +291,7 @@ public class UserInterface {
         double leaseFee = scanner.nextDouble();
         scanner.nextLine();
 
-        LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, vehicleLeased, expectedEndingValue, leaseFee);
+        LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, vehicleLeased, expectedEndingValue, leaseFee, totalPrice, monthlyPayment);
 
         ContractFileManager contractFileManager = new ContractFileManager();
         contractFileManager.saveContract(leaseContract);
