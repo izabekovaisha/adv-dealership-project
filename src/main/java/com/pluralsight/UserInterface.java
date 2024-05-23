@@ -64,10 +64,10 @@ public class UserInterface {
                     processRemoveVehicleRequest();
                     break;
                 case "10":
-                    sellVehicle();
+                    processSellVehicle();
                     break;
                 case "11":
-                    leaseVehicle();
+                    processLeaseVehicle();
                     break;
                 case "12":
                     AdminUserInterface adminUserInterface = new AdminUserInterface();
@@ -199,16 +199,7 @@ public class UserInterface {
         manager.saveDealership(dealership);
     }
 
-    public void sellVehicle() {
-        System.out.println("Enter contract date (YYYYMMDD): ");
-        String dateOfContract = scanner.nextLine();
-
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.nextLine();
-
-        System.out.println("Enter customer email: ");
-        String customerEmail = scanner.nextLine();
-
+    public void processSellVehicle() {
         System.out.println("Enter vehicle VIN: ");
         int vin = scanner.nextInt();
         scanner.nextLine();
@@ -225,6 +216,15 @@ public class UserInterface {
             return;
         }
 
+        System.out.println("Enter contract date (YYYYMMDD): ");
+        String dateOfContract = scanner.nextLine();
+
+        System.out.println("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.println("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
+
         System.out.println("Enter sales tax amount: ");
         double salesTaxAmount = scanner.nextDouble();
         scanner.nextLine();
@@ -240,7 +240,9 @@ public class UserInterface {
         System.out.println("Is there an option for financing? (YES/NO): ");
         boolean financeOption = scanner.next().equalsIgnoreCase("YES");
         scanner.nextLine();
-        SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail, vehicleSold, salesTaxAmount, recordingFee, processingFee, financeOption, monthlyPayment);
+
+
+        SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail, vehicleSold, salesTaxAmount, recordingFee, processingFee, financeOption);
 
         ContractFileManager contractFileManager = new ContractFileManager();
         contractFileManager.saveContract(salesContract);
@@ -251,15 +253,7 @@ public class UserInterface {
         System.out.println("Vehicle sold and contract saved successfully.");
     }
 
-    public void leaseVehicle() {
-        System.out.println("Enter contract date (YYYYMMDD): ");
-        String dateOfContract = scanner.nextLine();
-
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.nextLine();
-
-        System.out.println("Enter customer email: ");
-        String customerEmail = scanner.nextLine();
+    public void processLeaseVehicle() {
 
         System.out.println("Enter vehicle VIN: ");
         int vin = scanner.nextInt();
@@ -276,12 +270,19 @@ public class UserInterface {
             System.out.println("Vehicle not found in inventory. Please try again.");
             return;
         }
-
         int currentYear = LocalDateTime.now().getYear();
         if (currentYear - vehicleLeased.getYear() > 3) {
             System.out.println("Vehicle is older than 3 years and cannot be leased.");
             return;
         }
+        System.out.println("Enter contract date (YYYYMMDD): ");
+        String dateOfContract = scanner.nextLine();
+
+        System.out.println("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.println("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
 
         System.out.println("Enter expected ending value: ");
         double expectedEndingValue = scanner.nextDouble();
@@ -291,7 +292,7 @@ public class UserInterface {
         double leaseFee = scanner.nextDouble();
         scanner.nextLine();
 
-        LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, vehicleLeased, expectedEndingValue, leaseFee, totalPrice, monthlyPayment);
+        LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail, vehicleLeased, expectedEndingValue, leaseFee);
 
         ContractFileManager contractFileManager = new ContractFileManager();
         contractFileManager.saveContract(leaseContract);

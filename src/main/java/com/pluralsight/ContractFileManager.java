@@ -24,14 +24,12 @@ public class ContractFileManager {
                 bw.write(commonContractInfo + vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake()
                         + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer()
                         + "|" + vehicle.getPrice() + "|" + salesContract.getSalesTaxAmount() + "|" + salesContract.getRecordingFee()
-                        + "|" + salesContract.getProcessingFee() + "|" + salesContract.getTotalPrice()
-                        + "|" + (salesContract.isFinance() ? "YES" : "NO") + "|" + salesContract.getMonthlyPayment());
+                        + "|" + salesContract.getProcessingFee() + "|" + (salesContract.isFinance() ? "YES" : "NO"));
             } else if (contract instanceof LeaseContract) {
                 LeaseContract leaseContract = (LeaseContract) contract;
                 bw.write(commonContractInfo + vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake()
                         + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer()
-                        + "|" + vehicle.getPrice() + "|" + leaseContract.getExpectedEndingValue() + "|" + leaseContract.getLeaseFee()
-                        + "|" + leaseContract.getTotalPrice() + "|" + leaseContract.getMonthlyPayment());
+                        + "|" + vehicle.getPrice() + "|" + leaseContract.getExpectedEndingValue() + "|" + leaseContract.getLeaseFee());
                 bw.newLine();
             }
 
@@ -59,24 +57,24 @@ public class ContractFileManager {
                 String color = fields[9];
                 int odometer = Integer.parseInt(fields[10]);
                 double price = Double.parseDouble(fields[11]);
+
                 if (contractType.equals("SALE")) {
                     double salesTaxAmount = Double.parseDouble(fields[12]);
                     double recordingFee = Double.parseDouble(fields[13]);
                     double processingFee = Double.parseDouble(fields[14]);
                     boolean finance = fields[15].equalsIgnoreCase("YES");
-                    double monthlyPayment = Double.parseDouble(fields[16]);
+
                     SalesContract salesContract = new SalesContract(dateOfContract, customerName, customerEmail,
                             new Vehicle(vin, year, make, model, vehicleType, color, odometer, price),
-                            salesTaxAmount, recordingFee, processingFee, finance, monthlyPayment);
+                            salesTaxAmount, recordingFee, processingFee, finance);
                     allContracts.add(salesContract);
+
                 } else if (contractType.equals("LEASE")) {
                     double expectedEndingValue = Double.parseDouble(fields[12]);
                     double leaseFee = Double.parseDouble(fields[13]);
-                    double totalPrice = Double.parseDouble(fields[14]);
-                    double monthlyPayment = Double.parseDouble(fields[15]);
                     LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail,
                             new Vehicle(vin, year, make, model, vehicleType, color, odometer, price),
-                            expectedEndingValue, leaseFee, totalPrice, monthlyPayment);
+                            expectedEndingValue, leaseFee);
                     allContracts.add(leaseContract);
                 }
             }

@@ -18,7 +18,9 @@ public class CarDealership {
             userInterface.display();
         } else if (choice == 2) {
             AdminUserInterface adminInterface = new AdminUserInterface();
-            adminInterface.displayAdminInterface();
+            if (!adminInterface.displayAdminInterface()) {
+                System.out.println("Incorrect password. Access denied");
+            }
         } else if (choice == 0) {
             System.out.println("Goodbye!");
         } else {

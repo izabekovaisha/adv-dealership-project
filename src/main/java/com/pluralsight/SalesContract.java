@@ -6,7 +6,7 @@ public class SalesContract extends Contract {
     private double processingFee;
     private boolean financeOption;
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, double salesTaxAmount, double recordingFee, double processingFee, boolean finance, double monthlyPayment) {
+    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, double salesTaxAmount, double recordingFee, double processingFee, boolean finance) {
         super(dateOfContract, customerName, customerEmail, vehicleSold);
         this.salesTaxAmount = salesTaxAmount;
         this.recordingFee = recordingFee;
@@ -45,6 +45,7 @@ public class SalesContract extends Contract {
     public void setFinance(boolean finance) {
         this.financeOption = finance;
     }
+
     @Override
     public double getTotalPrice() {
         return getVehicleSold().getPrice() + salesTaxAmount + recordingFee + processingFee;
@@ -71,6 +72,16 @@ public class SalesContract extends Contract {
             return 0.0;
         }
     }
+
+    @Override
+    public String toString() {
+        return "---------- Sales Contract ----------" +
+                "\n" + super.toString() +
+                "\nSales Tax Amount: " + salesTaxAmount +
+                "\nRecording Fee: " + recordingFee +
+                "\nProcessing Fee: " + processingFee +
+                "\nFinance Option: " + (financeOption ? "Yes" : "No");
     }
+}
 
 

@@ -1,10 +1,10 @@
 package com.pluralsight;
 
-public class LeaseContract extends  Contract {
-    private  double expectedEndingValue;
+public class LeaseContract extends Contract {
+    private double expectedEndingValue;
     private double leaseFee;
 
-    public LeaseContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, double expectedEndingValue, double leaseFee, double totalPrice, double monthlyPayment) {
+    public LeaseContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, double expectedEndingValue, double leaseFee) {
         super(dateOfContract, customerName, customerEmail, vehicleSold);
         this.expectedEndingValue = expectedEndingValue;
         this.leaseFee = leaseFee;
@@ -40,5 +40,13 @@ public class LeaseContract extends  Contract {
         monthlyPayment /= 100;
         return monthlyPayment;
     }
+
+    @Override
+    public String toString() {
+        return "---------- Lease Contract ----------" +
+                "\n" + super.toString() +
+                "\nExpected Ending Value: " + expectedEndingValue +
+                "\nLease Fee: " + leaseFee;
     }
+}
 

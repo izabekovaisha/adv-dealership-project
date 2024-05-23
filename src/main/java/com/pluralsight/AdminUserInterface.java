@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class AdminUserInterface {
 
-    private String admin_password = "admin_password2024!";
-    private Scanner scanner;
-    private ContractFileManager contractFileManager;
+    private final String admin_password = "admin_password2024!";
+    private final Scanner scanner;
+    private final ContractFileManager contractFileManager;
 
     public AdminUserInterface() {
         scanner = new Scanner(System.in);
-        ContractFileManager contractFileManager = new ContractFileManager();
+        contractFileManager = new ContractFileManager();
     }
 
-    public void displayAdminInterface() {
+    public boolean displayAdminInterface() {
         System.out.println("Enter admin password: ");
         String password = scanner.nextLine().trim();
 
         if (password.isEmpty()) {
             System.out.println("Password cannot be empty.");
-            return;
+            return false;
         }
 
         if (password.equals(admin_password)) {
@@ -33,7 +33,6 @@ public class AdminUserInterface {
 
                 System.out.print("Enter your choice: ");
                 String choice = scanner.nextLine().trim();
-
                 switch (choice) {
                     case "1":
                         listAllContracts();
@@ -49,10 +48,14 @@ public class AdminUserInterface {
                         break;
                 }
             }
+            return true;
+        } else {
+            return false;
         }
     }
 
-    private void listAllContracts() {
+
+    public void listAllContracts() {
         List<Contract> allContracts = contractFileManager.getAllContracts();
 
         if (allContracts.isEmpty()) {
@@ -65,7 +68,7 @@ public class AdminUserInterface {
         }
     }
 
-    private void searchContractsByCustomerName() {
+    public void searchContractsByCustomerName() {
         System.out.println("Enter customer name: ");
         String customerName = scanner.nextLine().trim();
         List<Contract> allContracts = contractFileManager.getAllContracts();
@@ -73,7 +76,6 @@ public class AdminUserInterface {
 
         for (Contract contract : allContracts) {
             if (contract.getCustomerName().equalsIgnoreCase(customerName)) {
-
                 System.out.println(contract.toString());
                 found = true;
             }

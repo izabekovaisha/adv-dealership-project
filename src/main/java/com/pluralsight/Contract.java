@@ -5,8 +5,6 @@ public abstract class Contract {
     private String customerName;
     private String customerEmail;
     private Vehicle vehicleSold;
-    private double totalPrice;
-    private double monthlyPayment;
 
     public Contract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.dateOfContract = dateOfContract;
@@ -50,4 +48,13 @@ public abstract class Contract {
     public abstract double getTotalPrice();
 
     public abstract double getMonthlyPayment();
+
+    @Override
+    public String toString() {
+        return "Contract Details:" +
+                "\nDate of Contract: " + dateOfContract +
+                "\nCustomer Name: " + customerName +
+                "\nCustomer Email: " + customerEmail +
+                "\nVehicle Details: " + vehicleSold.toString();
+    }
 }
