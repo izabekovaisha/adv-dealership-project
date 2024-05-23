@@ -34,9 +34,13 @@ Follow these steps to run the Car Dealership Application:
 - [GitHub](https://github.com/izabekovaisha/FinancialTracker)
 - [Git Bash](https://gitforwindows.org)
 
-## Demo
+## User Interface Demo
 
-![Recording2024-05-15154820-ezgif com-video-to-gif-converter](https://github.com/izabekovaisha/CarDealership/assets/166551874/1f4babc5-db5d-4b34-b348-a94d3bb102c3)
+![Recording2024-05-22211740-ezgif com-optimize](https://github.com/izabekovaisha/adv-dealership-project/assets/166551874/1f4c2798-be5a-475d-af5b-67f875a5a260)
+
+## Admin Interface Demo
+
+![Recording2024-05-22203241-ezgif com-optimize](https://github.com/izabekovaisha/adv-dealership-project/assets/166551874/ab3789a3-5f18-4559-ba1d-b711089e0a91)
 
 ## Future Work
 
