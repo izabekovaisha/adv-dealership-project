@@ -2,7 +2,7 @@
 
 ## Car Dealership is a comprehensive console-based tool tailored for dealership managers and sales personnel to efficiently manage vehicle inventory, sales, and leasing operations. This application offers an intuitive interface for performing various tasks related to inventory management, customer interactions, and financial transactions.
 
-### Features
+## Features
 
 The Car Dealership Application offers a range of functionalities to streamline dealership operations:
 
@@ -11,13 +11,13 @@ The Car Dealership Application offers a range of functionalities to streamline d
 * **Sales and Lease Options**: Conduct vehicle sales and lease transactions with built-in functionalities for calculating taxes, fees, total prices, and monthly payments.
 * **User-friendly Interface**: Intuitive console-based interface for seamless navigation and interaction, ensuring ease of use for dealership staff.
 
-### Prerequisites
+## Prerequisites
 
 * **Java Development Kit (JDK)**: Ensure you have JDK installed and configured on your system.
 * **IntelliJ IDEA**: Download and install IntelliJ IDEA for a smooth development experience.
 * **Git**: Install Git to clone the repository and manage version control.
 
-### Running the Application
+## Running the Application
 
 Follow these steps to run the Car Dealership Application:
 
@@ -56,4 +56,4 @@ Follow these steps to run the Car Dealership Application:
 
 [Click](https://github.com/users/izabekovaisha/projects/6) to view the guiding user stories.
 
-
+## With these modifications, the Car Dealership Application offers an enhanced experience for managing vehicle inventory and facilitating sales and leasing transactions efficiently.
