@@ -10,11 +10,13 @@ public class ContractFileManager {
     public void saveContract(Contract contract) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
             String contractType = "";
+
             if (contract instanceof SalesContract) {
                 contractType = "SALE";
             } else if (contract instanceof LeaseContract) {
                 contractType = "LEASE";
             }
+
             String commonContractInfo = contractType + "|" + contract.getDateOfContract()
                     + "|" + contract.getCustomerName() + "|" + contract.getCustomerEmail() + "|";
 
@@ -25,6 +27,7 @@ public class ContractFileManager {
                         + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer()
                         + "|" + vehicle.getPrice() + "|" + salesContract.getSalesTaxAmount() + "|" + salesContract.getRecordingFee()
                         + "|" + salesContract.getProcessingFee() + "|" + (salesContract.isFinance() ? "YES" : "NO"));
+
             } else if (contract instanceof LeaseContract) {
                 LeaseContract leaseContract = (LeaseContract) contract;
                 bw.write(commonContractInfo + vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake()
@@ -72,6 +75,7 @@ public class ContractFileManager {
                 } else if (contractType.equals("LEASE")) {
                     double expectedEndingValue = Double.parseDouble(fields[12]);
                     double leaseFee = Double.parseDouble(fields[13]);
+
                     LeaseContract leaseContract = new LeaseContract(dateOfContract, customerName, customerEmail,
                             new Vehicle(vin, year, make, model, vehicleType, color, odometer, price),
                             expectedEndingValue, leaseFee);

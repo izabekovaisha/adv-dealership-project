@@ -14,6 +14,10 @@ public class AdminUserInterface {
         contractFileManager = new ContractFileManager();
     }
 
+    /* Method to display the admin interface and handle admin functionalities by:
+     * Reading, validating, and checking  if password is empty
+     * Checking if the entered password matches the admin password and performing actions based on admin's choice
+     */
     public boolean displayAdminInterface() {
         System.out.println("Enter admin password: ");
         String password = scanner.nextLine().trim();
@@ -54,7 +58,10 @@ public class AdminUserInterface {
         }
     }
 
-
+    /* Method to list all contracts stored in the system by:
+     * Retrieving all contracts from the ContractFileManager
+     * Checking if contracts list is empty and displaying details of each contract
+     */
     public void listAllContracts() {
         List<Contract> allContracts = contractFileManager.getAllContracts();
 
@@ -68,6 +75,11 @@ public class AdminUserInterface {
         }
     }
 
+    /* Method to search contracts by customer name by:
+     * Reading customer name from user input and retrieving all contracts
+     * Iterating through each contract to find matching customer name
+     * Notifying if no contracts found for the provided customer name
+     */
     public void searchContractsByCustomerName() {
         System.out.println("Enter customer name: ");
         String customerName = scanner.nextLine().trim();

@@ -13,6 +13,9 @@ public class UserInterface {
         scanner = new Scanner(System.in);
     }
 
+    /* Method to display the user interface and handle user interactions by:
+     * Displaying menu options and performing actions based on user's choice
+     */
     public void display() {
         init();
         boolean quit = false;
@@ -199,12 +202,18 @@ public class UserInterface {
         manager.saveDealership(dealership);
     }
 
+    /* Method to process user request to sell vehicle by:
+     * Prompting user to enter the VIN of the vehicle to be sold and searching for the vehicle in the dealership inventory
+     * Prompting user to enter contract details
+     * Creating and saving a sales contract with the provided details
+     * Removing the sold vehicle from the dealership inventory and saving the updated info to file
+     */
     public void processSellVehicle() {
         System.out.println("Enter vehicle VIN: ");
         int vin = scanner.nextInt();
         scanner.nextLine();
-
         Vehicle vehicleSold = null;
+
         for (Vehicle vehicle : dealership.getAllVehicles()) {
             if (vehicle.getVin() == vin) {
                 vehicleSold = vehicle;
@@ -253,13 +262,20 @@ public class UserInterface {
         System.out.println("Vehicle sold and contract saved successfully.");
     }
 
+    /* Method to process user request to lease a vehicle by:
+     * Prompting user to enter the VIN of the vehicle to be leased and searching for the vehicle in the dealership inventory
+     * Checking if the vehicle is older than 3 years
+     * Prompting user to enter lease contract details
+     * Creating and saving a lease contract with the provided details to file
+     * Removing the leased vehicle from the dealership inventory and saving the updated info to file
+     */
     public void processLeaseVehicle() {
 
         System.out.println("Enter vehicle VIN: ");
         int vin = scanner.nextInt();
         scanner.nextLine();
-
         Vehicle vehicleLeased = null;
+
         for (Vehicle vehicle : dealership.getAllVehicles()) {
             if (vehicle.getVin() == vin) {
                 vehicleLeased = vehicle;
