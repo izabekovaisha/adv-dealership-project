@@ -28,7 +28,7 @@ public class UserInterface {
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
             System.out.println("10. Sell vehicle");
-            System.out.println("11.Lease vehicle");
+            System.out.println("11. Lease vehicle");
             System.out.println("12. Admin");
             System.out.println("0. Quit");
 
